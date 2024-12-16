@@ -1,7 +1,7 @@
 import keyboard
 from math import gcd
 
-DEBUG_PRINT = False
+DEBUG = False
 
 _vd = [str(i) for i in range(10)]
 _vd.append(".")
@@ -11,8 +11,8 @@ INPUT = ""
 PERIOD_TRACKER = []
 PREVIOUS_CHAR = ""
 
-def print_results():
-    print(PERIOD_TRACKER)
+def print_debug():
+    print(f"p={PERIOD_TRACKER}, prev_char={PREVIOUS_CHAR}")
 
 def check_period(p=PERIOD_TRACKER):
     max_period = 0
@@ -27,6 +27,7 @@ def check_period(p=PERIOD_TRACKER):
 
 def _perform_backspace():
     global INPUT
+    global PREVIOUS_CHAR
     INPUT = INPUT[:-1]
     PREVIOUS_CHAR = INPUT[-1] if len(INPUT) > 0 else ""
     for i in range(len(PERIOD_TRACKER)):
@@ -100,13 +101,14 @@ if __name__ == "__main__":
     while True:
         e = keyboard.read_event()
         if e.event_type == "down":
-            if e.name == "esc":
+            if e.name == "esc" or e.name == "q":
                 print("\nbye!")
                 exit(0)
             elif e.name == "d":
-                print_results()
+                if DEBUG: print_debug()
             elif e.name == "enter":
                 print("")
+                _clear()
             elif e.name == "c":
                 _clear()
                 # print(f"period str = {PERIOD_TRACKER[-(mp+1)]}")
@@ -123,8 +125,5 @@ if __name__ == "__main__":
                 mp = 0
 
             frac = produce_fraction(INPUT, mp)
-            if DEBUG_PRINT:
-                print(f"\r{PERIOD_TRACKER}, max_period={mp}", end="", flush=True)
-            else: 
-                print(f"\r\033[Kcurrent input: {INPUT}, equivalent fraction form: {frac}", end="", flush=True)
+            print(f"\r\033[Kcurrent input: {INPUT}, equivalent fraction form: {frac}", end="", flush=True)
 
