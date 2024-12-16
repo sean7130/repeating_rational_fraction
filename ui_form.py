@@ -29,6 +29,7 @@ class Ui_MainWindow(object):
         self.RR.setObjectName(u"RR")
         self.verticalLayout_3 = QVBoxLayout(self.RR)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.decimal_input = QTextEdit(self.RR)
         self.decimal_input.setObjectName(u"decimal_input")
         self.decimal_input.setMaximumSize(QSize(16777215, 23))
@@ -63,6 +64,7 @@ class Ui_MainWindow(object):
         self.fraction_subframe.setFrameShape(QFrame.StyledPanel)
         self.fraction_subframe.setFrameShadow(QFrame.Raised)
         self.verticalLayout = QVBoxLayout(self.fraction_subframe)
+        self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.label = QLabel(self.fraction_subframe)
@@ -146,6 +148,7 @@ class Ui_MainWindow(object):
         sizePolicy1.setHeightForWidth(self.fraction_text.sizePolicy().hasHeightForWidth())
         self.fraction_text.setSizePolicy(sizePolicy1)
         self.fraction_text.setMaximumSize(QSize(16777215, 31))
+        self.fraction_text.setLineWrapMode(QTextEdit.FixedColumnWidth)
 
         self.horizontalLayout_2.addWidget(self.fraction_text)
 
@@ -180,10 +183,10 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.decimal_input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Enter repeating decimal...", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"D", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"D", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">N</span><span style=\" font-size:12pt;\">umerator</span></p></body></html>", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">D</span><span style=\" font-size:12pt;\">enominator</span></p></body></html>", None))
         self.equal_sign.setText(QCoreApplication.translate("MainWindow", u"=", None))
-        self.eval.setText(QCoreApplication.translate("MainWindow", u"No repeats so far, keep typing", None))
+        self.eval.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">No repeats so far: keep typing</p></body></html>", None))
         self.latex_checkbox.setText(QCoreApplication.translate("MainWindow", u"Latex Code", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.RR), QCoreApplication.translate("MainWindow", u"Determine Repeats", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Q2RR_), QCoreApplication.translate("MainWindow", u"Repeating Rational to Fraction", None))
