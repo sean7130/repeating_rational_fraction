@@ -25,7 +25,7 @@ def check_period(p=PERIOD_TRACKER):
     return max_period
 
 
-def _perform_backspace():
+def perform_backspace():
     global INPUT
     global PREVIOUS_CHAR
     INPUT = INPUT[:-1]
@@ -58,13 +58,13 @@ def simplify_fractions(d, n):
     return d//mutral_gcd, n//mutral_gcd
 
 
-def produce_fraction(user_input, max_period):
+def _produce_fraction(user_input, max_period):
     if not max_period or len(PERIOD_TRACKER) == 0:
-        return "<No fraction yet>"
+        return "<No fraction yet>", -1, -1
     decimal_and_fraction = PERIOD_TRACKER[0].split('.')
     if len(decimal_and_fraction) != 2:
-        return "<No fraction yet>"
-    non_repeating, repeating = seperate_repeats(decimal_and_fraction[1], mp)
+        return "<No fraction yet>", -1, -1
+    non_repeating, repeating = seperate_repeats(decimal_and_fraction[1], max_period)
 
     # piece together the repeating and non repeating part 
     non_repeating_int = int(decimal_and_fraction[0] + non_repeating)
@@ -78,12 +78,15 @@ def produce_fraction(user_input, max_period):
     d, n = _produce_blunt_overall_fraction(non_repeating_int, len(non_repeating), repeating_int, repeating_int_multiplication_factor)
     d, n = simplify_fractions(d, n)
     # print(f"results: {n}/{d}={n/d}")
-    return f"{n}/{d}={n/d}"
+    return f"{n}/{d}={n/d}", n, d
 
 def _clear():
     global INPUT
     INPUT = ""
     PERIOD_TRACKER.clear()
+
+def clear():
+    _clear()
 
 def register_input(user_input):
     global INPUT
@@ -94,6 +97,15 @@ def register_input(user_input):
     # only use previous char because the current one may be the one with rounding errors
     PREVIOUS_CHAR = user_input
     PERIOD_TRACKER.append("")
+
+
+def produce_fraction():
+    if INPUT != "":
+        mp = check_period()
+    else:
+        mp = 0
+
+    return _produce_fraction(INPUT, mp)
 
 
 if __name__ == "__main__":
@@ -114,16 +126,12 @@ if __name__ == "__main__":
                 # print(f"period str = {PERIOD_TRACKER[-(mp+1)]}")
                 print(f"\r\033[Kcurrent input: <cleared>", end="", flush=True)
             elif e.name == "backspace":
-                _perform_backspace()
+                perform_backspace()
 
             elif e.name in VALID_DIGITS:
                 register_input(e.name)
 
-            if INPUT != "":
-                mp = check_period()
-            else:
-                mp = 0
+            frac, n, d = produce_fraction()
 
-            frac = produce_fraction(INPUT, mp)
             print(f"\r\033[Kcurrent input: {INPUT}, equivalent fraction form: {frac}", end="", flush=True)
 
