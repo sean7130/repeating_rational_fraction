@@ -1,5 +1,7 @@
 import keyboard
+
 from math import gcd
+from sys import argv
 
 DEBUG = False
 
@@ -67,7 +69,7 @@ def _produce_fraction(user_input, max_period):
     non_repeating, repeating = seperate_repeats(decimal_and_fraction[1], max_period)
 
     # piece together the repeating and non repeating part 
-    non_repeating_int = int(decimal_and_fraction[0] + non_repeating)
+    non_repeating_int = int(decimal_and_fraction[0] + non_repeating) if (decimal_and_fraction[0] + non_repeating) != "" else 0
     repeating_int = int(repeating)
     repeating_int_multiplication_factor = len(repeating) + len(non_repeating)
     blunt_denominator = (10**repeating_int_multiplication_factor-10**len(non_repeating))
@@ -82,8 +84,12 @@ def _produce_fraction(user_input, max_period):
 
 def _clear():
     global INPUT
+    global PREVIOUS_CHAR
     INPUT = ""
+    PREVIOUS_CHAR = ""
     PERIOD_TRACKER.clear()
+    print(f"{argv[0]}: cleared.")
+    print_debug()
 
 def clear():
     _clear()
@@ -97,6 +103,7 @@ def register_input(user_input):
     # only use previous char because the current one may be the one with rounding errors
     PREVIOUS_CHAR = user_input
     PERIOD_TRACKER.append("")
+    # print_debug()
 
 
 def produce_fraction():

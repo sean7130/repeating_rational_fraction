@@ -29,14 +29,34 @@ class Ui_MainWindow(object):
         self.RR.setObjectName(u"RR")
         self.verticalLayout_3 = QVBoxLayout(self.RR)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.decimal_input = QTextEdit(self.RR)
+        self.verticalLayout_3.setContentsMargins(0, 9, 0, 0)
+        self.frame = QFrame(self.RR)
+        self.frame.setObjectName(u"frame")
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
+        self.frame.setSizePolicy(sizePolicy)
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_4 = QHBoxLayout(self.frame)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.decimal_input = QTextEdit(self.frame)
         self.decimal_input.setObjectName(u"decimal_input")
         self.decimal_input.setMaximumSize(QSize(16777215, 23))
         self.decimal_input.setInputMethodHints(Qt.ImhDigitsOnly)
         self.decimal_input.setLineWrapMode(QTextEdit.NoWrap)
 
-        self.verticalLayout_3.addWidget(self.decimal_input)
+        self.horizontalLayout_4.addWidget(self.decimal_input)
+
+        self.pushButton = QPushButton(self.frame)
+        self.pushButton.setObjectName(u"pushButton")
+
+        self.horizontalLayout_4.addWidget(self.pushButton)
+
+
+        self.verticalLayout_3.addWidget(self.frame)
 
         self.line = QFrame(self.RR)
         self.line.setObjectName(u"line")
@@ -130,9 +150,6 @@ class Ui_MainWindow(object):
 
         self.fraction_output = QFrame(self.output_frame)
         self.fraction_output.setObjectName(u"fraction_output")
-        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.fraction_output.sizePolicy().hasHeightForWidth())
         self.fraction_output.setSizePolicy(sizePolicy)
         self.fraction_output.setFrameShape(QFrame.StyledPanel)
@@ -183,6 +200,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.decimal_input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Enter repeating decimal...", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.numerator.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">N</span><span style=\" font-size:12pt;\">umerator</span></p></body></html>", None))
         self.denominator.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">D</span><span style=\" font-size:12pt;\">enominator</span></p></body></html>", None))
         self.equal_sign.setText(QCoreApplication.translate("MainWindow", u"=", None))
