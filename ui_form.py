@@ -50,10 +50,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_4.addWidget(self.decimal_input)
 
-        self.pushButton = QPushButton(self.frame)
-        self.pushButton.setObjectName(u"pushButton")
+        self.clear = QPushButton(self.frame)
+        self.clear.setObjectName(u"clear")
 
-        self.horizontalLayout_4.addWidget(self.pushButton)
+        self.horizontalLayout_4.addWidget(self.clear)
 
 
         self.verticalLayout_3.addWidget(self.frame)
@@ -200,13 +200,13 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.decimal_input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Enter repeating decimal...", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
+        self.clear.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.numerator.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">N</span><span style=\" font-size:12pt;\">umerator</span></p></body></html>", None))
         self.denominator.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">D</span><span style=\" font-size:12pt;\">enominator</span></p></body></html>", None))
         self.equal_sign.setText(QCoreApplication.translate("MainWindow", u"=", None))
         self.eval.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">No repeats so far: keep typing</p></body></html>", None))
         self.latex_checkbox.setText(QCoreApplication.translate("MainWindow", u"Latex Code", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.RR), QCoreApplication.translate("MainWindow", u"Determine Repeats", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.Q2RR_), QCoreApplication.translate("MainWindow", u"Repeating Rational to Fraction", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.RR), QCoreApplication.translate("MainWindow", u"Repeating Rational to Fraction", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.Q2RR_), QCoreApplication.translate("MainWindow", u"Determine Repeats", None))
     # retranslateUi
 
