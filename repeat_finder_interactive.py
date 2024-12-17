@@ -1,7 +1,7 @@
 import keyboard
 
 from math import gcd
-from sys import argv
+# from sys import argv
 
 DEBUG = False
 
@@ -88,8 +88,8 @@ def _clear():
     INPUT = ""
     PREVIOUS_CHAR = ""
     PERIOD_TRACKER.clear()
-    print(f"{argv[0]}: cleared.")
-    print_debug()
+    # print(f"{argv[0]}: cleared.")
+    # print_debug()
 
 def clear():
     _clear()
