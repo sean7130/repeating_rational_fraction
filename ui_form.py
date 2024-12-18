@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(471, 273)
+        MainWindow.resize(327, 218)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
@@ -193,6 +193,7 @@ class Ui_MainWindow(object):
         self.Q2RR_.setObjectName(u"Q2RR_")
         self.verticalLayout_8 = QVBoxLayout(self.Q2RR_)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.fraction_display_3 = QFrame(self.Q2RR_)
         self.fraction_display_3.setObjectName(u"fraction_display_3")
         self.fraction_display_3.setFrameShape(QFrame.StyledPanel)
@@ -208,26 +209,27 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.setSpacing(0)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.n_input = QLabel(self.fraction_subframe_3)
+        self.n_input = QLineEdit(self.fraction_subframe_3)
         self.n_input.setObjectName(u"n_input")
-        self.n_input.setFont(font)
+        font4 = QFont()
+        font4.setFamily(u"Times New Roman")
+        font4.setPointSize(14)
+        self.n_input.setFont(font4)
         self.n_input.setAlignment(Qt.AlignCenter)
-        self.n_input.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextEditable|Qt.TextEditorInteraction|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.verticalLayout_7.addWidget(self.n_input)
 
-        self.faction_line_3 = QFrame(self.fraction_subframe_3)
-        self.faction_line_3.setObjectName(u"faction_line_3")
-        self.faction_line_3.setFrameShape(QFrame.HLine)
-        self.faction_line_3.setFrameShadow(QFrame.Sunken)
+        self.division_line = QFrame(self.fraction_subframe_3)
+        self.division_line.setObjectName(u"division_line")
+        self.division_line.setFrameShape(QFrame.HLine)
+        self.division_line.setFrameShadow(QFrame.Sunken)
 
-        self.verticalLayout_7.addWidget(self.faction_line_3)
+        self.verticalLayout_7.addWidget(self.division_line)
 
-        self.d_input = QLabel(self.fraction_subframe_3)
+        self.d_input = QLineEdit(self.fraction_subframe_3)
         self.d_input.setObjectName(u"d_input")
-        self.d_input.setFont(font)
+        self.d_input.setFont(font4)
         self.d_input.setAlignment(Qt.AlignCenter)
-        self.d_input.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextEditable|Qt.TextEditorInteraction|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.verticalLayout_7.addWidget(self.d_input)
 
@@ -242,27 +244,37 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_8.addWidget(self.equal_sign_3)
 
-        self.eval_3 = QLabel(self.fraction_display_3)
-        self.eval_3.setObjectName(u"eval_3")
+        self.eval_2 = QLabel(self.fraction_display_3)
+        self.eval_2.setObjectName(u"eval_2")
         palette1 = QPalette()
         palette1.setBrush(QPalette.Active, QPalette.WindowText, brush)
         palette1.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
-        self.eval_3.setPalette(palette1)
-        self.eval_3.setFont(font1)
-        self.eval_3.setAlignment(Qt.AlignCenter)
-        self.eval_3.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.eval_2.setPalette(palette1)
+        self.eval_2.setFont(font1)
+        self.eval_2.setAlignment(Qt.AlignCenter)
+        self.eval_2.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.horizontalLayout_8.addWidget(self.eval_3)
+        self.horizontalLayout_8.addWidget(self.eval_2)
 
 
         self.verticalLayout_8.addWidget(self.fraction_display_3)
 
-        self.label = QLabel(self.Q2RR_)
-        self.label.setObjectName(u"label")
-        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
-        self.label.setSizePolicy(sizePolicy)
+        self.line_2 = QFrame(self.Q2RR_)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.HLine)
+        self.line_2.setFrameShadow(QFrame.Sunken)
 
-        self.verticalLayout_8.addWidget(self.label)
+        self.verticalLayout_8.addWidget(self.line_2)
+
+        self.digit_repeat_label = QLabel(self.Q2RR_)
+        self.digit_repeat_label.setObjectName(u"digit_repeat_label")
+        sizePolicy.setHeightForWidth(self.digit_repeat_label.sizePolicy().hasHeightForWidth())
+        self.digit_repeat_label.setSizePolicy(sizePolicy)
+        font5 = QFont()
+        font5.setPointSize(9)
+        self.digit_repeat_label.setFont(font5)
+
+        self.verticalLayout_8.addWidget(self.digit_repeat_label)
 
         self.tabWidget.addTab(self.Q2RR_, "")
 
@@ -272,14 +284,14 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Repeating Rational Calculator", None))
         self.numerator.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">N</span><span style=\" font-size:12pt;\">umerator</span></p></body></html>", None))
         self.denominator.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">D</span><span style=\" font-size:12pt;\">enominator</span></p></body></html>", None))
         self.equal_sign.setText(QCoreApplication.translate("MainWindow", u"=", None))
@@ -288,11 +300,11 @@ class Ui_MainWindow(object):
         self.fraction_text.setText(QCoreApplication.translate("MainWindow", u"NaN", None))
         self.latex_checkbox.setText(QCoreApplication.translate("MainWindow", u"Latex Code", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.RR), QCoreApplication.translate("MainWindow", u"Repeating Rational to Fraction", None))
-        self.n_input.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">N</span><span style=\" font-size:12pt;\">umerator</span></p></body></html>", None))
-        self.d_input.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">D</span><span style=\" font-size:12pt;\">enominator</span></p></body></html>", None))
+        self.n_input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Enter Numerator", None))
+        self.d_input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Enter Denominator", None))
         self.equal_sign_3.setText(QCoreApplication.translate("MainWindow", u"=", None))
-        self.eval_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">Eval will show here</p></body></html>", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Total repeated digits: ", None))
+        self.eval_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">Enter Numerator</p><p align=\"center\">and</p><p align=\"center\">Denominator First</p></body></html>", None))
+        self.digit_repeat_label.setText(QCoreApplication.translate("MainWindow", u"Total repeated digits: ", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Q2RR_), QCoreApplication.translate("MainWindow", u"Determine Repeats", None))
     # retranslateUi
 

@@ -1,6 +1,7 @@
 import sys
 import re
 import repeat_finder_interactive
+from math import gcd
 
 from PySide2.QtWidgets import QApplication, QMainWindow
 
@@ -16,13 +17,16 @@ class MainWindow(QMainWindow):
 
         self.ui.latex_checkbox.stateChanged.connect(self.latex_checkbox_toggle)
 
-    def _sanitize_decimal_input(self):
-        text = self.ui.decimal_input.text()
+        self.ui.n_input.textChanged.connect(self.determine_user_input_repeats)
+        self.ui.d_input.textChanged.connect(self.determine_user_input_repeats)
+
+    def _sanitize_decimal_input(self, input_field):
+        text = input_field.text()
         if not re.fullmatch(r"[0-9.]*", text):
             corrected_text = re.sub(r"[^0-9.]", "", text)
-            self.ui.decimal_input.blockSignals(True)
-            self.ui.decimal_input.setPlainText(corrected_text)
-            self.ui.decimal_input.blockSignals(False)
+            input_field.blockSignals(True)
+            input_field.setPlainText(corrected_text)
+            input_field.blockSignals(False)
 
     def _clear_decimal_input_and_repeat_finder(self):
         repeat_finder_interactive.clear()
@@ -31,6 +35,24 @@ class MainWindow(QMainWindow):
         self.ui.decimal_input.setText("")
         self.current_decimal_input_text = self.ui.decimal_input.text()
         self.ui.decimal_input.blockSignals(False)
+
+    def determine_user_input_repeats(self):
+        self._sanitize_decimal_input(self.ui.d_input)
+        self._sanitize_decimal_input(self.ui.n_input)
+        d = self.ui.d_input.text()
+        n = self.ui.n_input.text()
+        
+        if d != "" and n != "":
+            d = int(d)
+            n = int(n)
+            self.ui.eval_2.setText(str(n/d))
+            repeats = repeating_decimal_length(n, d)
+            self.ui.digit_repeat_label.setText(f"Total repeated digits: {repeats}")
+        else:
+            self.ui.eval_2.setText("NaN")
+            self.ui.digit_repeat_label.setText("Total repeated digits: <invalid input>")
+
+
 
     def latex_checkbox_toggle(self):
         frac, n, d = repeat_finder_interactive.produce_fraction()
@@ -67,7 +89,7 @@ class MainWindow(QMainWindow):
             self.reset_default_render()
 
     def handle_decimal_input(self):
-        self._sanitize_decimal_input()
+        self._sanitize_decimal_input(self.ui.decimal_input)
         new_text = self.ui.decimal_input.text()
         if new_text != self.current_decimal_input_text:
             if new_text[:-1] == self.current_decimal_input_text:
@@ -99,6 +121,32 @@ def get_default_dne_text():
            u"<html><head/><body><p><span style=\" font-size:26pt;\">D</span><span style=\" font-size:12pt;\">enominator</span></p></body></html>",
            u"<html><head/><body><p align=\"center\">No repeats so far: keep typing</p></body></html>")
     return ret
+
+
+def repeating_decimal_length(n, d):
+    """
+    Bonus function to find the repeating length when provided with two integers n, d
+    where n/d
+    """
+    g = gcd(n, d)
+    d //= g
+
+    while d % 2 == 0:
+        d //= 2
+    while d % 5 == 0:
+        d //= 5
+
+    if d == 1:
+        return 0
+
+    length = 1
+    remainder = 10 % d
+
+    while remainder != 1:
+        remainder = (remainder * 10) % d
+        length += 1
+
+    return length
 
 
 if __name__ == "__main__":
