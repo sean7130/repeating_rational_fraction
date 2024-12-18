@@ -12,10 +12,12 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.decimal_input.textChanged.connect(self.handle_decimal_input)
-        self.current_decimal_input_text = self.ui.decimal_input.toPlainText()
+        self.current_decimal_input_text = self.ui.decimal_input.text()
+
+        self.ui.latex_checkbox.stateChanged.connect(self.latex_checkbox_toggle)
 
     def _sanitize_decimal_input(self):
-        text = self.ui.decimal_input.toPlainText()
+        text = self.ui.decimal_input.text()
         if not re.fullmatch(r"[0-9.]*", text):
             corrected_text = re.sub(r"[^0-9.]", "", text)
             self.ui.decimal_input.blockSignals(True)
@@ -27,19 +29,36 @@ class MainWindow(QMainWindow):
 
         self.ui.decimal_input.blockSignals(True)
         self.ui.decimal_input.setText("")
-        self.current_decimal_input_text = self.ui.decimal_input.toPlainText()
+        self.current_decimal_input_text = self.ui.decimal_input.text()
         self.ui.decimal_input.blockSignals(False)
+
+    def latex_checkbox_toggle(self):
+        frac, n, d = repeat_finder_interactive.produce_fraction()
+        self.update_copy_box(n, d)
+
+    def update_copy_box(self, n, d):
+        if self.ui.latex_checkbox.isChecked():
+            self.ui.fraction_text.setText(f"\\frac{{{n}}}{{{d}}}")
+        else:
+            self.ui.fraction_text.setText(f"{n}/{d}")
+
+    def reset_copy_box(self):
+        self.ui.fraction_text.setText("NaN")
 
     def update_calculated_fraction(self, n, d):
         self.ui.numerator.setText(str(n))
         self.ui.denominator.setText(str(d))
         self.ui.eval.setText(str(n/d))
 
+        self.update_copy_box(n, d)
+
     def reset_default_render(self):
         n_text, d_text, eval_text = get_default_dne_text()
         self.ui.numerator.setText(str(n_text))
         self.ui.denominator.setText(str(d_text))
         self.ui.eval.setText(str(eval_text))
+
+        self.reset_copy_box()
 
     def update_ui_with_fraction(self, frac, n , d):
         if d != -1:
@@ -49,7 +68,7 @@ class MainWindow(QMainWindow):
 
     def handle_decimal_input(self):
         self._sanitize_decimal_input()
-        new_text = self.ui.decimal_input.toPlainText()
+        new_text = self.ui.decimal_input.text()
         if new_text != self.current_decimal_input_text:
             if new_text[:-1] == self.current_decimal_input_text:
                 repeat_finder_interactive.register_input(new_text[-1])
@@ -59,7 +78,7 @@ class MainWindow(QMainWindow):
             # elif len(new_text) < len(self.current_decimal_input_text):
             #     # TODO: repeat_finder_interactive.perform_backspace()
             #     self._clear_decimal_input_and_repeat_finder()
-            #     new_text = self.ui.decimal_input.toPlainText()
+            #     new_text = self.ui.decimal_input.text()
                 
             else:
                 # it appears the user did an edit in the middle of the number: reclaculate everything

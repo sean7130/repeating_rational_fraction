@@ -42,18 +42,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4 = QHBoxLayout(self.frame)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.decimal_input = QTextEdit(self.frame)
+        self.decimal_input = QLineEdit(self.frame)
         self.decimal_input.setObjectName(u"decimal_input")
-        self.decimal_input.setMaximumSize(QSize(16777215, 23))
-        self.decimal_input.setInputMethodHints(Qt.ImhDigitsOnly)
-        self.decimal_input.setLineWrapMode(QTextEdit.NoWrap)
+        self.decimal_input.setClearButtonEnabled(True)
 
         self.horizontalLayout_4.addWidget(self.decimal_input)
-
-        self.clear = QPushButton(self.frame)
-        self.clear.setObjectName(u"clear")
-
-        self.horizontalLayout_4.addWidget(self.clear)
 
 
         self.verticalLayout_3.addWidget(self.frame)
@@ -94,6 +87,7 @@ class Ui_MainWindow(object):
         font.setPointSize(22)
         self.numerator.setFont(font)
         self.numerator.setAlignment(Qt.AlignCenter)
+        self.numerator.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.verticalLayout.addWidget(self.numerator)
 
@@ -108,6 +102,7 @@ class Ui_MainWindow(object):
         self.denominator.setObjectName(u"denominator")
         self.denominator.setFont(font)
         self.denominator.setAlignment(Qt.AlignCenter)
+        self.denominator.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.verticalLayout.addWidget(self.denominator)
 
@@ -135,6 +130,7 @@ class Ui_MainWindow(object):
         font1.setPointSize(12)
         self.eval.setFont(font1)
         self.eval.setAlignment(Qt.AlignCenter)
+        self.eval.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.horizontalLayout_3.addWidget(self.eval)
 
@@ -156,18 +152,30 @@ class Ui_MainWindow(object):
         self.fraction_output.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_2 = QHBoxLayout(self.fraction_output)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.fraction_text = QTextBrowser(self.fraction_output)
+        self.horizontalLayout_2.setContentsMargins(6, 0, 0, 0)
+        self.textual_form_label = QLabel(self.fraction_output)
+        self.textual_form_label.setObjectName(u"textual_form_label")
+        font2 = QFont()
+        font2.setFamily(u"Segoe UI")
+        font2.setPointSize(9)
+        self.textual_form_label.setFont(font2)
+        self.textual_form_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
+
+        self.horizontalLayout_2.addWidget(self.textual_form_label)
+
+        self.fraction_text = QLabel(self.fraction_output)
         self.fraction_text.setObjectName(u"fraction_text")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.fraction_text.sizePolicy().hasHeightForWidth())
-        self.fraction_text.setSizePolicy(sizePolicy1)
-        self.fraction_text.setMaximumSize(QSize(16777215, 31))
-        self.fraction_text.setLineWrapMode(QTextEdit.FixedColumnWidth)
+        font3 = QFont()
+        font3.setFamily(u"Segoe UI")
+        font3.setPointSize(10)
+        self.fraction_text.setFont(font3)
+        self.fraction_text.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.horizontalLayout_2.addWidget(self.fraction_text)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
         self.latex_checkbox = QCheckBox(self.fraction_output)
         self.latex_checkbox.setObjectName(u"latex_checkbox")
@@ -199,12 +207,12 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.decimal_input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Enter repeating decimal...", None))
-        self.clear.setText(QCoreApplication.translate("MainWindow", u"Clear", None))
         self.numerator.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">N</span><span style=\" font-size:12pt;\">umerator</span></p></body></html>", None))
         self.denominator.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:26pt;\">D</span><span style=\" font-size:12pt;\">enominator</span></p></body></html>", None))
         self.equal_sign.setText(QCoreApplication.translate("MainWindow", u"=", None))
         self.eval.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">No repeats so far: keep typing</p></body></html>", None))
+        self.textual_form_label.setText(QCoreApplication.translate("MainWindow", u"Textual Form: ", None))
+        self.fraction_text.setText(QCoreApplication.translate("MainWindow", u"NaN", None))
         self.latex_checkbox.setText(QCoreApplication.translate("MainWindow", u"Latex Code", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.RR), QCoreApplication.translate("MainWindow", u"Repeating Rational to Fraction", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Q2RR_), QCoreApplication.translate("MainWindow", u"Determine Repeats", None))
