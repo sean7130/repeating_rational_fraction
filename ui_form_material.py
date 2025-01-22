@@ -17,13 +17,13 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(327, 257)
+        MainWindow.resize(398, 311)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.horizontalLayout = QVBoxLayout(self.centralwidget)
-        self.horizontalLayout.setSpacing(0)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_5 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_5.setSpacing(0)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.top_bar = QFrame(self.centralwidget)
         self.top_bar.setObjectName(u"top_bar")
         self.top_bar.setStyleSheet(u"")
@@ -41,15 +41,22 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addWidget(self.CloseButton)
 
 
-        self.horizontalLayout.addWidget(self.top_bar)
+        self.verticalLayout_5.addWidget(self.top_bar)
 
-        self.tabWidget = QTabWidget(self.centralwidget)
+        self.padding_frame = QFrame(self.centralwidget)
+        self.padding_frame.setObjectName(u"padding_frame")
+        self.padding_frame.setFrameShape(QFrame.StyledPanel)
+        self.padding_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_4 = QVBoxLayout(self.padding_frame)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(-1, 0, -1, -1)
+        self.tabWidget = QTabWidget(self.padding_frame)
         self.tabWidget.setObjectName(u"tabWidget")
         self.RR = QWidget()
         self.RR.setObjectName(u"RR")
         self.verticalLayout_3 = QVBoxLayout(self.RR)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalLayout_3.setContentsMargins(0, 9, 0, 0)
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.frame = QFrame(self.RR)
         self.frame.setObjectName(u"frame")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
@@ -213,7 +220,7 @@ class Ui_MainWindow(object):
         self.Q2RR_.setObjectName(u"Q2RR_")
         self.verticalLayout_8 = QVBoxLayout(self.Q2RR_)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.verticalLayout_8.setContentsMargins(0, 0, 0, 6)
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.fraction_display_3 = QFrame(self.Q2RR_)
         self.fraction_display_3.setObjectName(u"fraction_display_3")
         self.fraction_display_3.setFrameShape(QFrame.StyledPanel)
@@ -290,6 +297,7 @@ class Ui_MainWindow(object):
         self.digit_repeat_label.setObjectName(u"digit_repeat_label")
         sizePolicy.setHeightForWidth(self.digit_repeat_label.sizePolicy().hasHeightForWidth())
         self.digit_repeat_label.setSizePolicy(sizePolicy)
+        self.digit_repeat_label.setMinimumSize(QSize(0, 22))
         font5 = QFont()
         font5.setPointSize(9)
         self.digit_repeat_label.setFont(font5)
@@ -298,13 +306,16 @@ class Ui_MainWindow(object):
 
         self.tabWidget.addTab(self.Q2RR_, "")
 
-        self.horizontalLayout.addWidget(self.tabWidget)
+        self.verticalLayout_4.addWidget(self.tabWidget)
+
+
+        self.verticalLayout_5.addWidget(self.padding_frame)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
