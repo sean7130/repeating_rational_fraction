@@ -4,8 +4,14 @@ import repeat_finder_interactive
 from math import gcd
 
 from PySide2.QtWidgets import QApplication, QMainWindow
+from PySide2.QtCore import Qt
+material = False
 
-from ui_form import Ui_MainWindow
+if material: 
+    from qt_material import apply_stylesheet
+    from ui_form_material import Ui_MainWindow
+else:
+    from ui_form import Ui_MainWindow
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -148,9 +154,51 @@ def repeating_decimal_length(n, d):
 
     return length
 
+def setup_top_bar(widget):
+    boundry_color = "rgb(46, 51, 56)"
+    widget.ui.centralwidget.setStyleSheet("""
+        QWidget#centralwidget{
+            background-color: transparent;
+
+        }
+        """)
+    widget.ui.top_bar.setStyleSheet("""
+        QFrame#top_bar{
+            border-top: 3px solid %s; 
+            border-right: 1px slid %s;
+            border-left : 1px slid %s;
+            border-top-left-radius: 13px;
+            border-top-left-radius: 13px;
+            border-top-right-radius: 13px;
+        }
+        """ % (
+            boundry_color,
+            boundry_color,
+            boundry_color,
+            )
+        )
+
+
+def apply_theme(app, widget, theme='dark_amber.xml'):
+    widget.resize(500, 300)
+    widget.setAttribute(Qt.WA_TranslucentBackground)
+    widget.setWindowFlags(Qt.FramelessWindowHint)
+    extra = {
+        'font_family': 'Roboto',
+        'density_scale': '0',
+        'button_shape': 'default',
+        'font_size': '13px',
+        'line_height': '0px',
+    }
+    apply_stylesheet(app, theme=theme, invert_secondary=True, extra=extra)
+    setup_top_bar(widget)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = MainWindow()
+
+    if material:
+        apply_theme(app, widget)
     widget.show()
+
     sys.exit(app.exec_())
